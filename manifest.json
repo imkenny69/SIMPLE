@@ -1,0 +1,41 @@
+{
+  "name": "SIMPLE - Chat Manager",
+  "short_name": "SIMPLE",
+  "description": "SIMPLE: A powerful and intuitive chat manager for seamless and secure communication.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#191a1a",
+  "theme_color": "#00ff00",
+  "icons": [
+    {
+      "src": "/assets/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "orientation": "portrait",
+  "scope": "/",
+  "lang": "ru",
+  "dir": "ltr",
+  "display_override": ["window-controls-overlay"],
+  "categories": ["communication", "productivity"],
+  "shortcuts": [
+    {
+      "name": "Add to Chat",
+      "url": "https://vk.com/app6441755_-228142188",
+      "description": "Add SIMPLE to your chat"
+    },
+    {
+      "name": "Bot Commands",
+      "url": "https://vk.com/@simple_manager-simple-komandy-i-ih-funkcional",
+      "description": "View SIMPLE bot commands"
+    }
+  ]
+}
