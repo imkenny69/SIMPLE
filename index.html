@@ -4,20 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="SIMPLE: A powerful and intuitive chat manager for seamless and secure communication.">
-    <meta name="keywords" content="chat manager, bot, communication, VK, SIMPLE">
-    <meta name="author" content="Roman Alexandrovich">
+    <meta name="theme-color" content="#00ff00">
     <title>SIMPLE: Чат-менеджер</title>
-    <link rel="stylesheet" href="/styles.css">
-    <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/assets/icon-192x192.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" href="./assets/icon-192x192.png">
+    <!-- Optional: Uncomment if hosting in a subdirectory, replace 'repo-name' with your GitHub repository name -->
+    <!-- <base href="/repo-name/"> -->
 </head>
 <body>
     <div class="loader">
         <div class="loader-glow"></div>
-        <div class="loader-text">Загрузка...</div>
+        <p class="loader-text">Загрузка...</p>
     </div>
 
     <header>
@@ -25,17 +23,17 @@
             <h1 class="glitch" data-text="SIMPLE">SIMPLE</h1>
             <div class="header-controls">
                 <div class="search-bar">
-                    <input type="text" id="searchInput" placeholder="Поиск..." aria-label="Поиск">
-                    <button onclick="performSearch()" aria-label="Поиск">🔍</button>
+                    <input type="text" id="searchInput" placeholder="Поиск..." aria-label="Поиск по сайту">
+                    <button onclick="performSearch()">🔍</button>
                 </div>
-                <button onclick="openModal('themeModal')" aria-label="Настроить тему">🎨</button>
+                <button onclick="openModal('themeModal')">🎨</button>
                 <button class="lang-toggle" onclick="toggleLanguage()">RU</button>
             </div>
         </div>
     </header>
 
-    <main class="container">
-        <section class="hero" id="hero">
+    <div class="container">
+        <section class="hero">
             <div class="hero-particles"></div>
             <h2 class="glitch" data-text="SIMPLE: Чат-менеджер">SIMPLE: Чат-менеджер</h2>
             <p>Ваш идеальный помощник для быстрой, безопасной и удобной коммуникации.</p>
@@ -47,10 +45,10 @@
             </a>
         </section>
 
-        <section class="actions" id="actions">
+        <section class="actions">
             <h2 class="glitch" data-text="Возможности">Возможности</h2>
             <div class="action-buttons">
-                <a href="#" class="fancy" onclick="openModal('botInfoModal'); return false;">
+                <a href="#" onclick="openModal('botInfoModal'); return false;" class="fancy">
                     <span class="text">📜 Информация о боте</span>
                     <span class="top-key"></span>
                     <span class="bottom-key-1"></span>
@@ -62,13 +60,13 @@
                     <span class="bottom-key-1"></span>
                     <span class="bottom-key-2"></span>
                 </a>
-                <a href="#" class="fancy" onclick="openModal('teamModal'); return false;">
+                <a href="#" onclick="openModal('teamModal'); return false;" class="fancy">
                     <span class="text">👤 Состав команды</span>
                     <span class="top-key"></span>
                     <span class="bottom-key-1"></span>
                     <span class="bottom-key-2"></span>
                 </a>
-                <a href="#" class="fancy" onclick="openModal('contactModal'); return false;">
+                <a href="#" onclick="openModal('contactModal'); return false;" class="fancy">
                     <span class="text">📧 Связаться с нами</span>
                     <span class="top-key"></span>
                     <span class="bottom-key-1"></span>
@@ -92,7 +90,7 @@
             </div>
         </section>
 
-        <section class="faq" id="faq">
+        <section class="faq">
             <h2 class="glitch" data-text="Часто задаваемые вопросы">Часто задаваемые вопросы</h2>
             <div class="faq-item">
                 <button class="faq-toggle" aria-controls="faq1" aria-expanded="false">Что такое SIMPLE?<span></span></button>
@@ -113,7 +111,7 @@
                 </div>
             </div>
         </section>
-    </main>
+    </div>
 
     <div class="modal" id="botInfoModal">
         <div class="modal-content">
@@ -125,17 +123,13 @@
                 <span class="bottom-key-1"></span>
                 <span class="bottom-key-2"></span>
             </a>
-            <button class="button" onclick="closeModal('botInfoModal')" aria-label="Закрыть модальное окно">
+            <button class="button" onclick="closeModal('botInfoModal')">
                 <div class="button-box">
                     <span class="button-elem">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M18 6L6 18M6 6l12 12" stroke="#00ff00" stroke-width="2" stroke-linecap="round"></path>
-                        </svg>
+                        <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="#00ff00" stroke-width="2"></path></svg>
                     </span>
                     <span class="button-elem">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M18 6L6 18M6 6l12 12" stroke="#00cc00" stroke-width="2" stroke-linecap="round"></path>
-                        </svg>
+                        <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="#00cc00" stroke-width="2"></path></svg>
                     </span>
                 </div>
             </button>
@@ -152,18 +146,14 @@
                 <span class="bottom-key-1"></span>
                 <span class="bottom-key-2"></span>
             </a>
-            <button class="button" onclick="closeModal('botCommandsModal')" aria-label="Закрыть модальное окно">
+            <button class="button" onclick="closeModal('botCommandsModal')">
                 <div class="button-box">
                     <span class="button-elem">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M18 6L6 18M6 6l12 12" stroke="#00ff00" stroke-width="2" stroke-linecap="round"></path>
-                        </svg>
+                        <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="#00ff00" stroke-width="2"></path></svg>
                     </span>
                     <span class="button-elem">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M18 6L6 18M6 6l12 12" stroke="#00cc00" stroke-width="2" stroke-linecap="round"></path>
-                        </svg>
-                    </span>
+                        <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="#00cc00" stroke-width="2"></path></svg>
+                    </span  >
                 </div>
             </button>
         </div>
@@ -174,17 +164,13 @@
             <h2 class="glitch" data-text="Состав команды">Состав команды</h2>
             <p><strong>Владелец:</strong> 'Man' 'Parlament' 🥷</p>
             <p><strong>Управляющий:</strong> Роман Александрович 👑</p>
-            <button class="button" onclick="closeModal('teamModal')" aria-label="Закрыть модальное окно">
+            <button class="button" onclick="closeModal('teamModal')">
                 <div class="button-box">
                     <span class="button-elem">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M18 6L6 18M6 6l12 12" stroke="#00ff00" stroke-width="2" stroke-linecap="round"></path>
-                        </svg>
+                        <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="#00ff00" stroke-width="2"></path></svg>
                     </span>
                     <span class="button-elem">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M18 6L6 18M6 6l12 12" stroke="#00cc00" stroke-width="2" stroke-linecap="round"></path>
-                        </svg>
+                        <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="#00cc00" stroke-width="2"></path></svg>
                     </span>
                 </div>
             </button>
@@ -201,17 +187,13 @@
                 <span class="bottom-key-1"></span>
                 <span class="bottom-key-2"></span>
             </a>
-            <button class="button" onclick="closeModal('contactModal')" aria-label="Закрыть модальное окно">
+            <button class="button" onclick="closeModal('contactModal')">
                 <div class="button-box">
                     <span class="button-elem">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M18 6L6 18M6 6l12 12" stroke="#00ff00" stroke-width="2" stroke-linecap="round"></path>
-                        </svg>
+                        <svg viewBox="0 0 24 24"><path d="M18 Khr 18 6L6 18M6 6l12 12" stroke="#00ff00" stroke-width="2"></path></svg>
                     </span>
                     <span class="button-elem">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M18 6L6 18M6 6l12 12" stroke="#00cc00" stroke-width="2" stroke-linecap="round"></path>
-                        </svg>
+                        <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="#00cc00" stroke-width="2"></path></svg>
                     </span>
                 </div>
             </button>
@@ -227,17 +209,13 @@
                 <button class="fancy" onclick="setTheme('light')">Светлая</button>
                 <button class="fancy" onclick="setTheme('neon')">Неон</button>
             </div>
-            <button class="button" onclick="closeModal('themeModal')" aria-label="Закрыть модальное окно">
+            <button class="button" onclick="closeModal('themeModal')">
                 <div class="button-box">
                     <span class="button-elem">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M18 6L6 18M6 6l12 12" stroke="#00ff00" stroke-width="2" stroke-linecap="round"></path>
-                        </svg>
+                        <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="#00ff00" stroke-width="2"></path></svg>
                     </span>
                     <span class="button-elem">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M18 6L6 18M6 6l12 12" stroke="#00cc00" stroke-width="2" stroke-linecap="round"></path>
-                        </svg>
+                        <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="#00cc00" stroke-width="2"></path></svg>
                     </span>
                 </div>
             </button>
@@ -248,24 +226,20 @@
         <div class="modal-content">
             <h2 class="glitch" data-text="Результаты поиска">Результаты поиска</h2>
             <div id="searchResults"></div>
-            <button class="button" onclick="closeModal('searchModal')" aria-label="Закрыть модальное окно">
+            <button class="button" onclick="closeModal('searchModal')">
                 <div class="button-box">
                     <span class="button-elem">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M18 6L6 18M6 6l12 12" stroke="#00ff00" stroke-width="2" stroke-linecap="round"></path>
-                        </svg>
+                        <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="#00ff00" stroke-width="2"></path></svg>
                     </span>
                     <span class="button-elem">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M18 6L6 18M6 6l12 12" stroke="#00cc00" stroke-width="2" stroke-linecap="round"></path>
-                        </svg>
+                        <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="#00cc00" stroke-width="2"></path></svg>
                     </span>
                 </div>
             </button>
         </div>
     </div>
 
-    <div class="notification" id="notification"></div>
+    <div id="notification" class="notification"></div>
 
     <a href="#" class="scroll-top fancy" onclick="scrollToTop(); return false;">
         <span class="text">⬆ Наверх</span>
@@ -276,10 +250,10 @@
 
     <footer>
         <p>© 2025 SIMPLE. Все права защищены.</p>
-        <p><a href="https://vk.com/simple_manager" target="_blank" class="vk-link" onclick="showNotification('Переход в VK...')">Следите за нами в VK</a></p>
+        <p><a href="https://vk.com/simple_manager" target="_blank" class="vk-link">Следите за нами в VK</a></p>
         <p>Разработано Романом Александровичем 👑</p>
     </footer>
 
-    <script src="/script.js"></script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'958505c299561c03',t:'MTc1MTM2MzY3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+    <script src="./script.js"></script>
+</body>
 </html>

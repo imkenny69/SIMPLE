@@ -2,7 +2,7 @@
     'use strict';
 
     // Language toggle state
-    let currentLang = 'ru';
+    let currentLang = localStorage.getItem('language') || 'ru';
 
     // Translation data
     const translations = {
@@ -140,7 +140,7 @@
                 if (focusableElements.length) {
                     const firstElement = focusableElements[0];
                     const lastElement = focusableElements[focusableElements.length - 1];
-                    modalContent.addEventListener('keydown', function trapFocus(e) {
+                    const trapFocus = function(e) {
                         if (e.key === 'Tab') {
                             if (e.shiftKey && document.activeElement === firstElement) {
                                 e.preventDefault();
@@ -150,7 +150,9 @@
                                 firstElement.focus();
                             }
                         }
-                    });
+                    };
+                    modalContent.addEventListener('keydown', trapFocus);
+                    modal.addEventListener('close', () => modalContent.removeEventListener('keydown', trapFocus));
                 }
             }
         } catch (e) {
@@ -279,79 +281,87 @@
     }
 
     function updateLanguage() {
-        const t = translations[currentLang];
-        document.title = t.title;
-        document.querySelector('h1').setAttribute('data-text', 'SIMPLE');
-        document.querySelector('h1').textContent = 'SIMPLE';
-        document.querySelector('.hero h2').setAttribute('data-text', t.heroTitle);
-        document.querySelector('.hero h2').textContent = t.heroTitle;
-        document.querySelector('.hero p').textContent = t.heroText;
-        document.querySelector('.hero .fancy .text').textContent = t.addToChat;
-        document.querySelector('.actions h2').setAttribute('data-text', t.actionsTitle);
-        document.querySelector('.actions h2').textContent = t.actionsTitle;
-        const actionButtons = document.querySelectorAll('.action-buttons .fancy .text');
-        actionButtons[0].textContent = t.botInfo;
-        actionButtons[1].textContent = t.botCommands;
-        actionButtons[2].textContent = t.team;
-        actionButtons[3].textContent = t.contact;
-        document.querySelector('.chat-preview h2').setAttribute('data-text', t.chatPreviewTitle);
-        document.querySelector('.chat-preview h2').textContent = t.chatPreviewTitle;
-        document.querySelector('.chat-message.bot:nth-child(1) p').textContent = t.chatMessageBot1;
-        document.querySelector('.chat-message.user p').textContent = t.chatMessageUser;
-        document.querySelector('.chat-message.bot:nth-child(3) p').textContent = t.chatMessageBot2;
-        document.querySelector('.faq h2').setAttribute('data-text', t.faqTitle);
-        document.querySelector('.faq h2').textContent = t.faqTitle;
-        const faqToggles = document.querySelectorAll('.faq-toggle');
-        faqToggles[0].textContent = t.faq1Question;
-        faqToggles[1].textContent = t.faq2Question;
-        faqToggles[2].textContent = t.faq3Question;
-        document.querySelector('#faq1').innerHTML = `<p>${t.faq1Answer}</p>`;
-        document.querySelector('#faq2').innerHTML = `<p>${t.faq2Answer}</p>`;
-        document.querySelector('#faq3').innerHTML = `<p>${t.faq3Answer}</p>`;
-        document.querySelector('#botInfoModal .modal-content h2').setAttribute('data-text', t.botInfoModalTitle);
-        document.querySelector('#botInfoModal .modal-content h2').textContent = t.botInfoModalTitle;
-        document.querySelector('#botInfoModal .modal-content p').textContent = t.botInfoModalText;
-        document.querySelector('#botInfoModal .fancy .text').textContent = t.botInfoModalButton;
-        document.querySelector('#botCommandsModal .modal-content h2').setAttribute('data-text', t.botCommandsModalTitle);
-        document.querySelector('#botCommandsModal .modal-content h2').textContent = t.botCommandsModalTitle;
-        document.querySelector('#botCommandsModal .modal-content p').textContent = t.botCommandsModalText;
-        document.querySelector('#botCommandsModal .fancy .text').textContent = t.botCommandsModalButton;
-        document.querySelector('#teamModal .modal-content h2').setAttribute('data-text', t.teamModalTitle);
-        document.querySelector('#teamModal .modal-content h2').textContent = t.teamModalTitle;
-        document.querySelector('#teamModal .modal-content p:nth-child(2)').innerHTML = t.teamModalOwner;
-        document.querySelector('#teamModal .modal-content p:nth-child(3)').innerHTML = t.teamModalManager;
-        document.querySelector('#contactModal .modal-content h2').setAttribute('data-text', t.contactModalTitle);
-        document.querySelector('#contactModal .modal-content h2').textContent = t.contactModalTitle;
-        document.querySelector('#contactModal .modal-content p').textContent = t.contactModalText;
-        document.querySelector('#contactModal .fancy .text').textContent = t.contactModalButton;
-        document.querySelector('#themeModal .modal-content h2').setAttribute('data-text', t.themeModalTitle);
-        document.querySelector('#themeModal .modal-content h2').textContent = t.themeModalTitle;
-        document.querySelector('#themeModal .modal-content p').textContent = t.themeModalText;
-        const themeButtons = document.querySelectorAll('.theme-options .fancy');
-        themeButtons[0].textContent = t.themeDark;
-        themeButtons[1].textContent = t.themeLight;
-        themeButtons[2].textContent = t.themeNeon;
-        document.querySelector('#searchModal .modal-content h2').setAttribute('data-text', t.searchModalTitle);
-        document.querySelector('#searchModal .modal-content h2').textContent = t.searchModalTitle;
-        document.querySelector('.scroll-top .text').textContent = t.scrollTop;
-        document.querySelector('footer p:nth-child(1)').textContent = t.footerCopyright;
-        document.querySelector('footer p:nth-child(2) a').textContent = t.footerFollow;
-        document.querySelector('footer p:nth-child(3)').textContent = t.footerDeveloped;
-        document.querySelector('#searchInput').placeholder = t.searchPlaceholder;
+        try {
+            const t = translations[currentLang];
+            document.title = t.title;
+            document.querySelector('h1').setAttribute('data-text', 'SIMPLE');
+            document.querySelector('h1').textContent = 'SIMPLE';
+            document.querySelector('.hero h2').setAttribute('data-text', t.heroTitle);
+            document.querySelector('.hero h2').textContent = t.heroTitle;
+            document.querySelector('.hero p').textContent = t.heroText;
+            document.querySelector('.hero .fancy .text').textContent = t.addToChat;
+            document.querySelector('.actions h2').setAttribute('data-text', t.actionsTitle);
+            document.querySelector('.actions h2').textContent = t.actionsTitle;
+            const actionButtons = document.querySelectorAll('.action-buttons .fancy .text');
+            actionButtons[0].textContent = t.botInfo;
+            actionButtons[1].textContent = t.botCommands;
+            actionButtons[2].textContent = t.team;
+            actionButtons[3].textContent = t.contact;
+            document.querySelector('.chat-preview h2').setAttribute('data-text', t.chatPreviewTitle);
+            document.querySelector('.chat-preview h2').textContent = t.chatPreviewTitle;
+            document.querySelector('.chat-message.bot:nth-child(1) p').textContent = t.chatMessageBot1;
+            document.querySelector('.chat-message.user p').textContent = t.chatMessageUser;
+            document.querySelector('.chat-message.bot:nth-child(3) p').textContent = t.chatMessageBot2;
+            document.querySelector('.faq h2').setAttribute('data-text', t.faqTitle);
+            document.querySelector('.faq h2').textContent = t.faqTitle;
+            const faqToggles = document.querySelectorAll('.faq-toggle');
+            faqToggles[0].textContent = t.faq1Question;
+            faqToggles[1].textContent = t.faq2Question;
+            faqToggles[2].textContent = t.faq3Question;
+            document.querySelector('#faq1').innerHTML = `<p>${t.faq1Answer}</p>`;
+            document.querySelector('#faq2').innerHTML = `<p>${t.faq2Answer}</p>`;
+            document.querySelector('#faq3').innerHTML = `<p>${t.faq3Answer}</p>`;
+            document.querySelector('#botInfoModal .modal-content h2').setAttribute('data-text', t.botInfoModalTitle);
+            document.querySelector('#botInfoModal .modal-content h2').textContent = t.botInfoModalTitle;
+            document.querySelector('#botInfoModal .modal-content p').textContent = t.botInfoModalText;
+            document.querySelector('#botInfoModal .fancy .text').textContent = t.botInfoModalButton;
+            document.querySelector('#botCommandsModal .modal-content h2').setAttribute('data-text', t.botCommandsModalTitle);
+            document.querySelector('#botCommandsModal .modal-content h2').textContent = t.botCommandsModalTitle;
+            document.querySelector('#botCommandsModal .modal-content p').textContent = t.botCommandsModalText;
+            document.querySelector('#botCommandsModal .fancy .text').textContent = t.botCommandsModalButton;
+            document.querySelector('#teamModal .modal-content h2').setAttribute('data-text', t.teamModalTitle);
+            document.querySelector('#teamModal .modal-content h2').textContent = t.teamModalTitle;
+            document.querySelector('#teamModal .modal-content p:nth-child(2)').innerHTML = t.teamModalOwner;
+            document.querySelector('#teamModal .modal-content p:nth-child(3)').innerHTML = t.teamModalManager;
+            document.querySelector('#contactModal .modal-content h2').setAttribute('data-text', t.contactModalTitle);
+            document.querySelector('#contactModal .modal-content h2').textContent = t.contactModalTitle;
+            document.querySelector('#contactModal .modal-content p').textContent = t.contactModalText;
+            document.querySelector('#contactModal .fancy .text').textContent = t.contactModalButton;
+            document.querySelector('#themeModal .modal-content h2').setAttribute('data-text', t.themeModalTitle);
+            document.querySelector('#themeModal .modal-content h2').textContent = t.themeModalTitle;
+            document.querySelector('#themeModal .modal-content p').textContent = t.themeModalText;
+            const themeButtons = document.querySelectorAll('.theme-options .fancy');
+            themeButtons[0].textContent = t.themeDark;
+            themeButtons[1].textContent = t.themeLight;
+            themeButtons[2].textContent = t.themeNeon;
+            document.querySelector('#searchModal .modal-content h2').setAttribute('data-text', t.searchModalTitle);
+            document.querySelector('#searchModal .modal-content h2').textContent = t.searchModalTitle;
+            document.querySelector('.scroll-top .text').textContent = t.scrollTop;
+            document.querySelector('footer p:nth-child(1)').textContent = t.footerCopyright;
+            document.querySelector('footer p:nth-child(2) a').textContent = t.footerFollow;
+            document.querySelector('footer p:nth-child(3)').textContent = t.footerDeveloped;
+            document.querySelector('#searchInput').placeholder = t.searchPlaceholder;
+        } catch (e) {
+            console.error('Error updating language:', e);
+        }
     }
 
     // FAQ toggle functionality
     function setupFAQ() {
-        const toggles = document.querySelectorAll('.faq-toggle');
-        toggles.forEach(toggle => {
-            toggle.addEventListener('click', () => {
-                const contentId = toggle.getAttribute('aria-controls');
-                const content = document.getElementById(contentId);
-                const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-                toggle.setAttribute('aria-expanded', !isExpanded);
-                content.classList.toggle('active');
+        try {
+            const toggles = document.querySelectorAll('.faq-toggle');
+            toggles.forEach(toggle => {
+                toggle.addEventListener('click', () => {
+                    const contentId = toggle.getAttribute('aria-controls');
+                    const content = document.getElementById(contentId);
+                    const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+                    toggle.setAttribute('aria-expanded', !isExpanded);
+                    content.classList.toggle('active');
+                });
             });
-        });
+        } catch (e) {
+            console.error('Error setting up FAQ:', e);
+        }
     }
 
     // Search functionality
@@ -431,17 +441,21 @@
 
     // Apply saved theme and language on load
     window.addEventListener('DOMContentLoaded', () => {
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            document.body.classList.add(`${savedTheme}-theme`);
-        }
-        const savedLang = localStorage.getItem('language');
-        if (savedLang) {
-            currentLang = savedLang;
-            document.querySelector('.lang-toggle').textContent = currentLang.toUpperCase();
+        try {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.body.classList.add(`${savedTheme}-theme`);
+            }
+            const savedLang = localStorage.getItem('language');
+            if (savedLang) {
+                currentLang = savedLang;
+                document.querySelector('.lang-toggle').textContent = currentLang.toUpperCase();
+            }
             updateLanguage();
+            setupFAQ();
+        } catch (e) {
+            console.error('Error during DOMContentLoaded:', e);
         }
-        setupFAQ();
     });
 
     // Handle Enter key for search
@@ -457,7 +471,7 @@
     // Service Worker Registration
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/service-worker.js')
+            navigator.serviceWorker.register('./service-worker.js')
                 .then(reg => console.log('Service Worker registered', reg))
                 .catch(err => console.error('Service Worker registration failed', err));
         });
